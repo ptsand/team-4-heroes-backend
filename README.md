@@ -1,5 +1,5 @@
 # team-4-heroes-backend
-
+[![Build and deploy JAR app to Azure Web App - krakProject](https://github.com/team-4-heroes/team-4-heroes-backend/actions/workflows/main_krakproject.yml/badge.svg)](https://github.com/team-4-heroes/team-4-heroes-backend/actions/workflows/main_krakproject.yml)
 ## Names and GItHub accounts
 He Englund https://github.com/SirMeows 
 
