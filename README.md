@@ -1,4 +1,4 @@
-# team-4-heroes-project-1
+# team-4-heroes-backend
 
 ## Names and GItHub accounts
 He Englund https://github.com/SirMeows 
