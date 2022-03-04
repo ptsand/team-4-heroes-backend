@@ -1,9 +1,3 @@
-# -team-4-heroes-backend
-
-
-
-
-
 # team-4-heroes-project-1
 
 ## Names and GItHub accounts
