@@ -29,5 +29,9 @@ Nye branches navngives i formatet feature/feature-name
 ## Group Project Selection
 Krak-projekt
 
-## Link to deployed project
-Set-up the initial pipeline for the Group Project
+## Hvad vi vil lave til onsdag 16/3
+1. Test Driven Development: Laver tests - tester metoder, data og endpoints der ikke er implementeret endnu for at vise hvad programmet skal kunne - så det rigtige kode kan fyldes ind senere. 
+2. Lave et skelet for backend og frontend
+3. CRUD for Hobby: Lave udkast til Create, Read, Update, Delete i vores kode
+4. Strukturere backend: Lave hvad der kan nås af entitet-klasser
+
