@@ -29,7 +29,7 @@ Nye branches navngives i formatet feature/feature-name
 ## Group Project Selection
 Krak-projekt
 
-## Hvad vi vil lave til onsdag 16/3
+## MiniSprint-1
 1. Test Driven Development: Laver tests - tester metoder, data og endpoints der ikke er implementeret endnu for at vise hvad programmet skal kunne - så det rigtige kode kan fyldes ind senere. 
 2. Lave et skelet for backend og frontend
 3. CRUD for Hobby: Lave udkast til Create, Read, Update, Delete i vores kode
