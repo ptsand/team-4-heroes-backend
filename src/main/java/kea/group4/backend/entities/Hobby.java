@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Getter @Setter
 public class Hobby {
     @Id
+    private long id;
+
     private String name;
 
     private String description;
