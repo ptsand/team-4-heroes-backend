@@ -21,13 +21,13 @@ public class Person {
     private String lastName;
     private long phoneNumber;
 
-    @OneToMany
-    private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
+    //@OneToMany
+    //private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
     //TODO: Format phone number for print
 
-    public void addHobby(HobbyInfo hobby) {
-        hobbies.add(hobby);
-    }
+    //public void addHobby(HobbyInfo hobby) {
+        //hobbies.add(hobby);
+    //}
 
     public Person(Long id, String email, String firstName, String lastName, long phoneNumber) {
         this.email = email;
