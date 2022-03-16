@@ -4,12 +4,10 @@ import kea.group4.backend.dto.PersonRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,11 +22,6 @@ public class Person {
     private String lastName;
     private long phoneNumber;
 
-    @CreationTimestamp
-    private LocalDateTime created;
-
-    @UpdateTimestamp
-    private LocalDateTime lastUpdated;
     //@OneToMany
     //private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
     //TODO: Format phone number for print
