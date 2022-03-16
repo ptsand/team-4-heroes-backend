@@ -22,7 +22,7 @@ public class Hobby {
 
     private  String category;
 
-    public Hobby(long id ,String name, Boolean isInDoor ,String description, String category){
+    public Hobby(long id ,String name, Boolean isInDoor, String description, String category){
         this.id = id;
         this.name = name;
         this.isInDoor = isInDoor;
