@@ -1,5 +1,6 @@
 package kea.group4.backend.services;
 
+import kea.group4.backend.dto.AddressRequest;
 import kea.group4.backend.dto.AddressResponse;
 import kea.group4.backend.entities.Address;
 import kea.group4.backend.error.Client4xxException;
@@ -23,5 +24,22 @@ public class AddressService {
 
     public AddressResponse getAddress(int id){
         return new AddressResponse(addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found")));
+    }
+
+    public AddressResponse addAddress(AddressRequest body) {
+        Address newAddress = addressRepository.save(new Address(body));
+        return new AddressResponse(newAddress);
+    }
+
+    public AddressResponse editAddress(AddressRequest body, int id) {
+        Address addressToEdit = new Address(body);
+        addressToEdit.setId(id);
+        addressRepository.save(addressToEdit);
+        return new AddressResponse(addressToEdit);
+
+    }
+
+    public void deleteAddress(int id) {
+        addressRepository.deleteById(id);
     }
 }

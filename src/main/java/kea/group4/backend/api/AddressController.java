@@ -1,11 +1,9 @@
 package kea.group4.backend.api;
 
+import kea.group4.backend.dto.AddressRequest;
 import kea.group4.backend.dto.AddressResponse;
 import kea.group4.backend.services.AddressService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +26,18 @@ public class AddressController {
         return addressService.getAddress(id);
     }
 
+    @PutMapping
+    public AddressResponse addAddress(@RequestBody AddressRequest body) {
+        return addressService.addAddress(body);
+    }
+
+    @PatchMapping("/{id}")
+    public AddressResponse editAddress(@RequestBody AddressRequest body, @PathVariable int id) {
+        return addressService.editAddress(body, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAddress(@PathVariable int id) {
+        addressService.deleteAddress(id);
+    }
 }

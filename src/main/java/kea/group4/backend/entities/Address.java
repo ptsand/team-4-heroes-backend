@@ -1,5 +1,6 @@
 package kea.group4.backend.entities;
 
+import kea.group4.backend.dto.AddressRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,5 +29,12 @@ public class Address {
         this.additionalInfo = additionalInfo;
         this.zipCode = zipCode;
         this.city = city;
+    }
+
+    public Address(AddressRequest body) {
+        this.street = body.getStreet();
+        this.additionalInfo = body.getAdditionalInfo();
+        this.zipCode = body.getZipCode();
+        this.city = body.getCity();
     }
 }
