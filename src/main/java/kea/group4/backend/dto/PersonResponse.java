@@ -1,4 +1,6 @@
-package kea.group4.backend.entities;
+package kea.group4.backend.dto;
+
+import kea.group4.backend.entities.Person;
 
 import java.util.List;
 import java.util.stream.Collectors;
