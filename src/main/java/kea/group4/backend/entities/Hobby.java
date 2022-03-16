@@ -14,6 +14,7 @@ public class Hobby {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
+
     private String name;
 
     private Boolean isInDoor;
