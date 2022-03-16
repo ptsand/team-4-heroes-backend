@@ -16,7 +16,7 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
-    // TODO: Add endpoints
+
     //Create
     @PostMapping
     public PersonResponse addPerson(@RequestBody PersonRequest body) {
