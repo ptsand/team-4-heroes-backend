@@ -1,7 +1,13 @@
 package kea.group4.backend.dto;
 
 import kea.group4.backend.entities.Hobby;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class HobbyResponse {
     long id;
     String name;
