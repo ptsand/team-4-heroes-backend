@@ -1,7 +1,5 @@
 package kea.group4.backend.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
