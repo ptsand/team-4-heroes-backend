@@ -1,4 +1,4 @@
-package kea.group4.backend.entities;
+package kea.group4.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
