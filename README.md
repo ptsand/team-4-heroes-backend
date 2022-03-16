@@ -35,3 +35,5 @@ Krak-projekt
 3. CRUD for Hobby: Lave udkast til Create, Read, Update, Delete i vores kode
 4. Strukturere backend: Lave hvad der kan nås af entitet-klasser
 
+## Back-end deployed
+https://krakproject.azurewebsites.net/
