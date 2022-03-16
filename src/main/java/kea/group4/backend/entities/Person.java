@@ -29,7 +29,7 @@ public class Person {
         //hobbies.add(hobby);
     //}
 
-    public Person(Long id, String email, String firstName, String lastName, long phoneNumber) {
+    public Person(String email, String firstName, String lastName, long phoneNumber) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
