@@ -35,5 +35,10 @@ Krak-projekt
 3. CRUD for Hobby: Lave udkast til Create, Read, Update, Delete i vores kode
 4. Strukturere backend: Lave hvad der kan nås af entitet-klasser
 
+## Minisprint-2
+1. Starte frontend: Skal kunne præsentere entiteter i tabeller
+2. Frontend skal kunne snakke sammen med adresse api - inkl. auto-complete (se video)
+3. Konverter hobbies.txt til database (se projektbeskrivelse)
+
 ## Back-end deployed
 https://krakproject.azurewebsites.net/
