@@ -1,5 +1,6 @@
 package kea.group4.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.group4.backend.dto.PersonRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,12 @@ public class Person {
     private String lastName;
     private long phoneNumber; //TODO: Format phone number for print
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
 
-    public void addHobby(HobbyInfo hobby) {
-        hobbies.add(hobby);
+    public void addHobbyInfo(HobbyInfo hobby) {
+        hobbyInfos.add(hobby);
     }
 
     public Person(String email, String firstName, String lastName, long phoneNumber) {

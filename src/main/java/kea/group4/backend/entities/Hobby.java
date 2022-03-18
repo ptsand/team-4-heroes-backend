@@ -1,5 +1,6 @@
 package kea.group4.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.group4.backend.dto.HobbyRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,9 @@ public class Hobby {
     private String description;
 
     private  String category;
+    @JsonIgnore
+    @OneToMany(mappedBy = "hobby")
+    private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
 
     public Hobby(String name, Boolean isInDoor, String description, String category){
         this.name = name;
