@@ -14,7 +14,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -42,15 +44,15 @@ class AddressControllerTest {
     }
 
     @Test
-    void getAddresseById() throws Exception {
+    void getAddressesById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/api/addresses/" + addressOneId)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(addressOneId))
-                .andExpect(MockMvcResultMatchers.jsonPath(("$.street")).value("streetname1"));
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").value(addressOneId))
+                .andExpect(jsonPath(("$.street")).value("streetname1"));
     }
 
     @Test
@@ -63,14 +65,28 @@ class AddressControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(2))
-                .andExpect(MockMvcResultMatchers.jsonPath(zip, 2300).exists())
-                .andExpect(MockMvcResultMatchers.jsonPath(street, "streetname2").exists());
+                .andExpect(jsonPath("$[0]").exists())
+                .andExpect(jsonPath("$.length()").value(2))
+                .andExpect(jsonPath(zip, 2300).exists())
+                .andExpect(jsonPath(street, "streetname2").exists());
     }
 
     @Test
-    void addAddress() {
+    void addAddress() throws Exception {
+        Address address = new Address("street3", "blablainfo", 1411, "KBH K");
+        mockMvc.perform(MockMvcRequestBuilders
+                    .post("/api/addresses/")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(address)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id", notNullValue()));
+
+        assertEquals(3, addressRepository.count());
+
+
+
 
     }
 
