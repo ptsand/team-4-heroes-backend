@@ -31,6 +31,14 @@ public class Address {
         this.city = city;
     }
 
+
+    public Address(String street, String additionalInfo, int zipCode, String city) {
+        this.street = street;
+        this.additionalInfo = additionalInfo;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
+
     public Address(AddressRequest body) {
         this.street = body.getStreet();
         this.additionalInfo = body.getAdditionalInfo();

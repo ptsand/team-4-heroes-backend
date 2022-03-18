@@ -13,12 +13,14 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class AddressResponse {
+    private int id;
     private String street;
     private String additionalInfo;
     private int zipCode;
     private String city;
 
     public AddressResponse(Address address) {
+        this.id = address.getId();
         this.street = address.getStreet();
         this.additionalInfo = address.getAdditionalInfo();
         this.zipCode = address.getZipCode();
