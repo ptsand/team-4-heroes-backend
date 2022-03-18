@@ -3,6 +3,7 @@ package kea.group4.backend.services;
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
 import kea.group4.backend.entities.Person;
+import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Service
 public class PersonService {
+
     PersonRepository personRepository;
 
     public PersonService(PersonRepository personRepository) {
@@ -27,7 +29,7 @@ public class PersonService {
     }
 
     public PersonResponse getPerson(long id) {
-        Person person = personRepository.findById(id).orElseThrow();
+        Person person = personRepository.findById(id).orElseThrow(()->new Client4xxException("person not found"));
         return new PersonResponse(person);
     }
 

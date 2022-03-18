@@ -34,6 +34,11 @@ public class PersonController {
         return personService.getPerson(id);
     }
 
+    @GetMapping("/{id}/hobbies")
+    public PersonResponse getPersonHobbies(@PathVariable long id) throws Exception {
+        return personService.getPerson(id);
+    }
+
     //Update
     @PutMapping("/{id}")
     public PersonResponse editPerson(@RequestBody PersonRequest body, @PathVariable long id){

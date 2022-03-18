@@ -16,7 +16,7 @@ import java.util.Date;
 public class HobbyInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    Long id;
     @ManyToOne
     Person person;
     @ManyToOne
@@ -24,6 +24,11 @@ public class HobbyInfo {
 
     @CreationTimestamp
     private Date dateSelected;
+
+    public HobbyInfo(Person person, Hobby hobby) {
+        this.person = person;
+        this.hobby = hobby;
+    }
 
     public HobbyInfo(HobbyInfoRequest hobbyInfoRequest) {
         this.person = hobbyInfoRequest.getPerson();
