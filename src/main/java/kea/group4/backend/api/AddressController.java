@@ -26,12 +26,12 @@ public class AddressController {
         return addressService.getAddress(id);
     }
 
-    @PutMapping
+    @PostMapping
     public AddressResponse addAddress(@RequestBody AddressRequest body) {
         return addressService.addAddress(body);
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     public AddressResponse editAddress(@RequestBody AddressRequest body, @PathVariable int id) {
         return addressService.editAddress(body, id);
     }

@@ -20,15 +20,14 @@ public class Person {
     private String email;
     private String firstName;
     private String lastName;
-    private long phoneNumber;
+    private long phoneNumber; //TODO: Format phone number for print
 
-    //@OneToMany
-    //private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
-    //TODO: Format phone number for print
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<HobbyInfo> hobbies = new HashSet<HobbyInfo>();
 
-    //public void addHobby(HobbyInfo hobby) {
-        //hobbies.add(hobby);
-    //}
+    public void addHobby(HobbyInfo hobby) {
+        hobbies.add(hobby);
+    }
 
     public Person(String email, String firstName, String lastName, long phoneNumber) {
         this.email = email;

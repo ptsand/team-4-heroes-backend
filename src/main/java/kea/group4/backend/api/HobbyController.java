@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/hobbeis")
+@RequestMapping("api/hobbies")
 public class HobbyController {
     HobbyService hobbyService;
 
