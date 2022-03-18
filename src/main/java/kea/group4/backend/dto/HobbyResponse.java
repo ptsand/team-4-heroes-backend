@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,5 +24,10 @@ public class HobbyResponse {
         this.isInDoor = hobby.getIsInDoor();
         this.category = hobby.getCategory();
         this.description = hobby.getDescription();
+    }
+
+    public static List<HobbyResponse> getHobbiesFromEntities(List<Hobby> hobbeis){
+        return hobbeis.stream().map(HobbyResponse::new).collect(Collectors.toList());
+
     }
 }
