@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/hobbeis")
+@RequestMapping("api/hobbies")
 public class HobbyController {
     HobbyService hobbyService;
 
@@ -17,8 +17,8 @@ public class HobbyController {
     }
 
     @GetMapping
-    public List<HobbyResponse> getHobbeis() {
-        return hobbyService.getHobbeis();
+    public List<HobbyResponse> getHobbies() {
+        return hobbyService.getHobbies();
     }
 
     @GetMapping("/{id}")
