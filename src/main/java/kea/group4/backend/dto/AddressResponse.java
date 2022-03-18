@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Setter
 @NoArgsConstructor
 public class AddressResponse {
-    private int id;
+    private long id;
     private String street;
     private String additionalInfo;
     private int zipCode;

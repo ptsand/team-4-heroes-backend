@@ -32,7 +32,7 @@ class AddressControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    static int addressOneId, addressTwoId;
+    static long addressOneId, addressTwoId;
 
     @BeforeEach
     void setUp() {
@@ -56,10 +56,10 @@ class AddressControllerTest {
     @Test
     void getAddresses() throws Exception {
         // https://support.smartbear.com/alertsite/docs/monitors/api/endpoint/jsonpath.html#:~:text=%5B%3F(expression)%5D,node%20being%20processed.
-        String zip = "$[?@.zip == '%n']"; // for each element in this array, zip equals placeholder string
-        String street = "[?@.street == '%s']";
+        String zip = "$[?(@.zipCode == %d)]";
+        String street = "$[?(@.street == '%s')]";  // for each element in this array, zip equals placeholder string
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/addresses")
+                        .get("/api/addresses/")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
