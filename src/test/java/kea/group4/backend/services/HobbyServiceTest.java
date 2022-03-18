@@ -31,12 +31,12 @@ class HobbyServiceTest {
     }
 
     @Test
-    void testGetHobbeis() {
+    void testGetHobbies() {
         Mockito.when(hobbyRepository.findAll()).thenReturn(List.of(
                 new Hobby("test1" ,true, "gitte", "kampsport"),
                 new Hobby("test2" ,true, "gitte", "gittesport")
         ));
-        List<HobbyResponse> hobbeis = hobbyService.getHobbeis();
+        List<HobbyResponse> hobbeis = hobbyService.getHobbies();
         assertEquals(2,hobbeis.size());
     }
 
