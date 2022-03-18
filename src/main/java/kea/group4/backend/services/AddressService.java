@@ -22,8 +22,8 @@ public class AddressService {
         return AddressResponse.getAddressesFromEntities(addresses);
     }
 
-    public AddressResponse getAddress(int id){
-        return new AddressResponse(addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found")));
+    public AddressResponse getAddress(long id){
+        return new AddressResponse(findAddress(id));
     }
 
     public AddressResponse addAddress(AddressRequest body) {
@@ -31,7 +31,7 @@ public class AddressService {
         return new AddressResponse(newAddress);
     }
 
-    public AddressResponse editAddress(AddressRequest body, int id) {
+    public AddressResponse editAddress(AddressRequest body, long id) {
         Address addressToEdit = new Address(body);
         addressToEdit.setId(id);
         addressRepository.save(addressToEdit);
@@ -39,7 +39,12 @@ public class AddressService {
 
     }
 
-    public void deleteAddress(int id) {
-        addressRepository.deleteById(id);
+    public void deleteAddress(long id) {
+        addressRepository.deleteById((int) id);
+    }
+
+    private Address findAddress(long id) {
+
+        return addressRepository.findById((int) id).orElseThrow(() -> new Client4xxException("address not found"));
     }
 }

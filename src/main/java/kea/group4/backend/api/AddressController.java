@@ -22,7 +22,7 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    public AddressResponse getAddress(@PathVariable int id) {
+    public AddressResponse getAddressById(@PathVariable long id) {
         return addressService.getAddress(id);
     }
 
@@ -32,12 +32,12 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public AddressResponse editAddress(@RequestBody AddressRequest body, @PathVariable int id) {
+    public AddressResponse editAddress(@RequestBody AddressRequest body, @PathVariable long id) {
         return addressService.editAddress(body, id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAddress(@PathVariable int id) {
+    public void deleteAddress(@PathVariable long id) {
         addressService.deleteAddress(id);
     }
 }
