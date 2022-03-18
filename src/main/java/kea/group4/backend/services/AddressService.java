@@ -36,15 +36,13 @@ public class AddressService {
         addressToEdit.setId(id);
         addressRepository.save(addressToEdit);
         return new AddressResponse(addressToEdit);
-
     }
 
     public void deleteAddress(long id) {
-        addressRepository.deleteById((int) id);
+        addressRepository.deleteById(id);
     }
 
     private Address findAddress(long id) {
-
-        return addressRepository.findById((int) id).orElseThrow(() -> new Client4xxException("address not found"));
+        return addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
     }
 }
