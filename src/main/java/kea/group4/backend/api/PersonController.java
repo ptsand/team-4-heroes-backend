@@ -36,13 +36,13 @@ public class PersonController {
 
     //Update
     @PutMapping("/{id}")
-    public PersonResponse editPerson(@RequestBody PersonRequest body, @PathVariable int id){
+    public PersonResponse editPerson(@RequestBody PersonRequest body, @PathVariable long id){
         return personService.editPerson(body, id);
     }
 
     //Delete
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable int id){
+    public void deletePerson(@PathVariable long id){
         personService.deletePerson(id);
     }
 }
