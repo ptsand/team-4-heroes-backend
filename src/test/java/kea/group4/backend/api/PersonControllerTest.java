@@ -2,6 +2,7 @@ package kea.group4.backend.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kea.group4.backend.entities.Person;
+import kea.group4.backend.repositories.HobbyInfoRepository;
 import kea.group4.backend.repositories.PersonRepository;
 import kea.group4.backend.services.PersonService;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,13 +27,14 @@ class PersonControllerTest {
     PersonRepository personRepository;
 
     @Autowired
-    PersonService personService;
+    HobbyInfoRepository hobbyInfoRepository;
 
     @Autowired
-    private ObjectMapper objectMapper;
+    PersonService personService;
 
     @BeforeEach
     public void setupPersonControllerTest() {
+        hobbyInfoRepository.deleteAll();
         personRepository.deleteAll();
         personRepository.save(new Person("test1@email.dk", "Anders", "Andersen", 88888888));
         personRepository.save(new Person("test2@email.dk", "Bent", "Bendsen", 88888888));
