@@ -17,8 +17,8 @@ public class HobbyController {
     }
 
     @GetMapping
-    public List<HobbyResponse> getHobbeis() {
-        return hobbyService.getHobbeis();
+    public List<HobbyResponse> getHobbies() {
+        return hobbyService.getHobbies();
     }
 
     @GetMapping("/{id}")

@@ -18,7 +18,7 @@ public class HobbyService extends RuntimeException{
     this.hobbyRepository = hobbyRepository;
     }
 
-    public List<HobbyResponse> getHobbeis(){
+    public List<HobbyResponse> getHobbies(){
         List<Hobby> hobbies = hobbyRepository.findAll();
         return HobbyResponse.getHobbiesFromEntities(hobbies);
     }
