@@ -40,8 +40,8 @@ class AddressControllerTest {
     @BeforeEach
     void setUp() {
         addressRepository.deleteAll();
-        addressOneId = addressRepository.save(new Address("streetname1", "some info", 2300, "Kbh")).getId();
-        addressTwoId = addressRepository.save(new Address("streetname2", "some info", 2300, "Kbh")).getId();
+        addressOneId = addressRepository.save(new Address("streetname1", 1, 1, "th", 2300)).getId();
+        addressTwoId = addressRepository.save(new Address("streetname2", 2, 2, "tv", 2300)).getId();
     }
 
     @Test
@@ -77,7 +77,7 @@ class AddressControllerTest {
 
     @Test
     void addAddress() throws Exception {
-        Address address = new Address("street3", "blablainfo", 1411, "KBH K");
+        Address address = new Address("street3", 3, 3, "tv", 1400);
 
         ResultActions result = mockMvc.perform(MockMvcRequestBuilders
             .post("/api/addresses/")

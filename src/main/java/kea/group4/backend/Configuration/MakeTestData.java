@@ -34,9 +34,9 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     public void makeAddresses() {
-        Address address1 = new Address("street1", "additional info test address 1", 1111, "city1");
-        Address address2 = new Address("street2", "additional info test address 2", 2222, "city2");
-        Address address3 = new Address("street3", "additional info test address 3", 3333, "city3");
+        Address address1 = new Address("street1", 11, 4, "th", 1111);
+        Address address2 = new Address("street2", 12, 2, "th", 2222);
+        Address address3 = new Address("street3", 13, 1, "th", 3333);
 
         addressRepository.save(address1);
         addressRepository.save(address2);
