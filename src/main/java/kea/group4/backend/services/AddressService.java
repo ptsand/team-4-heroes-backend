@@ -5,9 +5,12 @@ import kea.group4.backend.dto.AddressResponse;
 import kea.group4.backend.entities.Address;
 import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.AddressRepository;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
 
 @Service
 public class AddressService {
@@ -28,7 +31,14 @@ public class AddressService {
 
     public AddressResponse addAddress(AddressRequest body) {
         Address newAddress = addressRepository.save(new Address(body));
+
+        ExampleMatcher addressMatcher = ExampleMatcher.matching()
+                .withIgnorePaths("id")
+                .withMatcher("street", ignoreCase());
+
         return new AddressResponse(newAddress);
+        //TODO: If address already exits in database, return corresponding response.
+        // Else add address to database and return response
     }
 
     public AddressResponse editAddress(AddressRequest body, long id) {
@@ -45,4 +55,6 @@ public class AddressService {
     private Address findAddress(long id) {
         return addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
     }
+
+
 }
