@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -23,7 +24,7 @@ public class HobbyInfo {
     Hobby hobby;
 
     @CreationTimestamp
-    private Date dateSelected;
+    LocalDateTime dateSelected;
 
     public HobbyInfo(Person person, Hobby hobby) {
         this.person = person;

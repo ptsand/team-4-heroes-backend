@@ -26,7 +26,7 @@ public class Hobby {
 
     private  String category;
     @JsonIgnore
-    @OneToMany(mappedBy = "hobby")
+    @OneToMany(mappedBy = "hobby", fetch = FetchType.EAGER)
     private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
 
     public Hobby(String name, Boolean isInDoor, String description, String category){
