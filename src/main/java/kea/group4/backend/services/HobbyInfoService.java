@@ -7,6 +7,7 @@ import kea.group4.backend.repositories.HobbyInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HobbyInfoService {
@@ -34,5 +35,11 @@ public class HobbyInfoService {
 
     public void deleteHobbyInfo(long hobbyInfoId){
         hobbyInfoRepository.deleteById(hobbyInfoId);
+    }
+
+    public List<HobbyInfoResponse> getHobbyInfosByHobby(String hobby) {
+        List<HobbyInfo> hobbyInfos = hobbyInfoRepository.findAll().stream()
+                .filter(hi->hi.getHobby().getName().contains(hobby)).collect(Collectors.toList());
+        return HobbyInfoResponse.getHobbyInfosFromEntities(hobbyInfos);
     }
 }

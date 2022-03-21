@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/hobby-infos")
 public class HobbyInfoController {
 
@@ -20,6 +21,11 @@ public class HobbyInfoController {
     @GetMapping
     public List<HobbyInfoResponse> getHobbyInfos() {
         return hobbyInfoService.getHobbyInfos();
+    }
+
+    @GetMapping("/search-by-hobby/{hobby}")
+    public List<HobbyInfoResponse> getHobbyInfosByHobby(@PathVariable String hobby) {
+        return hobbyInfoService.getHobbyInfosByHobby(hobby);
     }
 
     @GetMapping("/{id}")
