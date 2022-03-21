@@ -39,7 +39,7 @@ public class HobbyInfoService {
 
     public List<HobbyInfoResponse> getHobbyInfosByHobby(String hobby) {
         List<HobbyInfo> hobbyInfos = hobbyInfoRepository.findAll().stream()
-                .filter(hi->hi.getHobby().getName().equalsIgnoreCase(hobby)).collect(Collectors.toList());
+                .filter(hi->hi.getHobby().getName().contains(hobby)).collect(Collectors.toList());
         return HobbyInfoResponse.getHobbyInfosFromEntities(hobbyInfos);
     }
 }
