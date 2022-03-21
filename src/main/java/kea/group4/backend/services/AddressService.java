@@ -27,34 +27,28 @@ public class AddressService {
     }
 
     public AddressResponse getAddress(long id){
-        return new AddressResponse(findAddress(id));
+        Address addressToFind = addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
+        return new AddressResponse(addressToFind);
     }
 
-    // https://www.baeldung.com/spring-data-exists-query#:~:text=5.1.%20The%20Matcher,fits%20the%20need.
+// https://www.baeldung.com/spring-data-exists-query#:~:text=4.%20Using%20a,well%2Dtested%20framework.
     public AddressResponse addAddress(AddressRequest body) {
 
-        //TODO: If address already exits in database, return corresponding response.
-        ExampleMatcher addressMatcher = ExampleMatcher.matching()
-                .withIgnorePaths("id")
-                .withMatcher("street", ignoreCase())
-                .withMatcher("houseNumber", ignoreCase())
-                .withMatcher("floorNumber", ignoreCase())
-                .withMatcher("doorNumber", ignoreCase())
-                .withMatcher("zipCode", ignoreCase());
+        Address newAddress = new Address(body);
+        Address addressFromDatabase = addressRepository.findByStreetAndHouseNumberAndFloorNumberAndDoorNumberAndZipCode(
+                newAddress.getStreet(),
+                newAddress.getHouseNumber(),
+                newAddress.getFloorNumber(),
+                newAddress.getDoorNumber(),
+                newAddress.getZipCode()
+        );
 
-        Address probe = new Address(body);
-        Example<Address> example = Example.of(probe, addressMatcher);
-        var exists = addressRepository.exists(example);
-
-        if(exists) {
-            return null;
+        if(addressFromDatabase != null) {
+            return new AddressResponse(addressFromDatabase);
         }
 
-        // TODO: Else add address to database and return response
-        Address newAddress = addressRepository.save(new Address(body));
+        addressRepository.save(newAddress);
         return new AddressResponse(newAddress);
-
-
     }
 
     public AddressResponse editAddress(AddressRequest body, long id) {
@@ -67,10 +61,4 @@ public class AddressService {
     public void deleteAddress(long id) {
         addressRepository.deleteById(id);
     }
-
-    private Address findAddress(long id) {
-        return addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
-    }
-
-
 }
