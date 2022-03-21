@@ -1,16 +1,14 @@
 package kea.group4.backend.entities;
 
 import kea.group4.backend.dto.AddressRequest;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @NoArgsConstructor
