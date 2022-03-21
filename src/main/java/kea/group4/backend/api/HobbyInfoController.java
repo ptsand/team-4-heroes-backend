@@ -22,6 +22,11 @@ public class HobbyInfoController {
         return hobbyInfoService.getHobbyInfos();
     }
 
+    @GetMapping("/search-by-hobby/{hobby}")
+    public List<HobbyInfoResponse> getHobbyInfosByHobby(@PathVariable String hobby) {
+        return hobbyInfoService.getHobbyInfosByHobby(hobby);
+    }
+
     @GetMapping("/{id}")
     public HobbyInfoResponse getHobbyInfo(@PathVariable long id){
         return hobbyInfoService.getHobbyInfo(id);
