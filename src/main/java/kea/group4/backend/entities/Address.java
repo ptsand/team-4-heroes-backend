@@ -19,30 +19,34 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String street;
-    private String additionalInfo;
+    private int houseNumber;
+    private int floorNumber;
+    private String doorNumber;
     private int zipCode;
-    private String city;
 
-    public Address(String street, String additionalInfo, int zipCode, String city) {
+    public Address(String street, int houseNumber, int floorNumber, String doorNumber, int zipCode) {
         this.street = street;
-        this.additionalInfo = additionalInfo;
+        this.houseNumber = houseNumber;
+        this.floorNumber = floorNumber;
+        this.doorNumber = doorNumber;
         this.zipCode = zipCode;
-        this.city = city;
     }
 
-
-    public Address(long id, String street, String additionalInfo, int zipCode, String city) {
-        this.id = id;
-        this.street = street;
-        this.additionalInfo = additionalInfo;
-        this.zipCode = zipCode;
-        this.city = city;
+//TODO: Overload constructor?
+public Address(long id, String street, int houseNumber, int floorNumber, String doorNumber, int zipCode) {
+    this.id = id;
+    this.street = street;
+    this.houseNumber = houseNumber;
+    this.floorNumber = floorNumber;
+    this.doorNumber = doorNumber;
+    this.zipCode = zipCode;
     }
 
     public Address(AddressRequest body) {
         this.street = body.getStreet();
-        this.additionalInfo = body.getAdditionalInfo();
+        this.houseNumber = body.getHouseNumber();
+        this.floorNumber = body.getFloorNumber();
+        this.doorNumber = body.getDoorNumber();
         this.zipCode = body.getZipCode();
-        this.city = body.getCity();
     }
 }
