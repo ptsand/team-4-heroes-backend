@@ -2,13 +2,14 @@ package kea.group4.backend.services;
 import kea.group4.backend.dto.HobbyInfoRequest;
 import kea.group4.backend.dto.HobbyInfoResponse;
 import kea.group4.backend.entities.HobbyInfo;
+import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.HobbyInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class HobbyInfoService extends RuntimeException{
+public class HobbyInfoService {
 
     HobbyInfoRepository hobbyInfoRepository;
 
@@ -22,7 +23,7 @@ public class HobbyInfoService extends RuntimeException{
     }
 
     public HobbyInfoResponse getHobbyInfo(long id){
-        HobbyInfo hobbyInfo = hobbyInfoRepository.findById(id).orElseThrow();
+        HobbyInfo hobbyInfo = hobbyInfoRepository.findById(id).orElseThrow(()->new Client4xxException("HobbyInfo not found"));
         return new HobbyInfoResponse(hobbyInfo);
     }
 
