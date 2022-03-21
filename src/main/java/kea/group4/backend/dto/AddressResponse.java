@@ -15,16 +15,18 @@ import java.util.stream.Collectors;
 public class AddressResponse {
     private long id;
     private String street;
-    private String additionalInfo;
+    private int houseNumber;
+    private int floorNumber;
+    private String doorNumber;
     private int zipCode;
-    private String city;
 
     public AddressResponse(Address address) {
         this.id = address.getId();
         this.street = address.getStreet();
-        this.additionalInfo = address.getAdditionalInfo();
+        this.houseNumber = address.getHouseNumber();
+        this.floorNumber = address.getFloorNumber();
+        this.doorNumber = address.getDoorNumber();
         this.zipCode = address.getZipCode();
-        this.city = address.getCity();
     }
 
     public static List<AddressResponse> getAddressesFromEntities(List<Address> addresses) {

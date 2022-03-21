@@ -11,7 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AddressRequest {
     private String street;
-    private String additionalInfo;
+    private int houseNumber;
+    private int floorNumber;
+    private String doorNumber;
     private int zipCode;
-    private String city;
 }

@@ -5,9 +5,13 @@ import kea.group4.backend.dto.AddressResponse;
 import kea.group4.backend.entities.Address;
 import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.AddressRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
 
 @Service
 public class AddressService {
@@ -23,11 +27,27 @@ public class AddressService {
     }
 
     public AddressResponse getAddress(long id){
-        return new AddressResponse(findAddress(id));
+        Address addressToFind = addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
+        return new AddressResponse(addressToFind);
     }
 
+// https://www.baeldung.com/spring-data-exists-query#:~:text=4.%20Using%20a,well%2Dtested%20framework.
     public AddressResponse addAddress(AddressRequest body) {
-        Address newAddress = addressRepository.save(new Address(body));
+
+        Address newAddress = new Address(body);
+        Address addressFromDatabase = addressRepository.findByStreetAndHouseNumberAndFloorNumberAndDoorNumberAndZipCode(
+                newAddress.getStreet(),
+                newAddress.getHouseNumber(),
+                newAddress.getFloorNumber(),
+                newAddress.getDoorNumber(),
+                newAddress.getZipCode()
+        );
+
+        if(addressFromDatabase != null) {
+            return new AddressResponse(addressFromDatabase);
+        }
+
+        addressRepository.save(newAddress);
         return new AddressResponse(newAddress);
     }
 
@@ -40,9 +60,5 @@ public class AddressService {
 
     public void deleteAddress(long id) {
         addressRepository.deleteById(id);
-    }
-
-    private Address findAddress(long id) {
-        return addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
     }
 }
