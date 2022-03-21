@@ -5,6 +5,7 @@ import kea.group4.backend.dto.AddressResponse;
 import kea.group4.backend.entities.Address;
 import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.AddressRepository;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
@@ -29,16 +30,31 @@ public class AddressService {
         return new AddressResponse(findAddress(id));
     }
 
+    // https://www.baeldung.com/spring-data-exists-query#:~:text=5.1.%20The%20Matcher,fits%20the%20need.
     public AddressResponse addAddress(AddressRequest body) {
-        Address newAddress = addressRepository.save(new Address(body));
 
+        //TODO: If address already exits in database, return corresponding response.
         ExampleMatcher addressMatcher = ExampleMatcher.matching()
                 .withIgnorePaths("id")
-                .withMatcher("street", ignoreCase());
+                .withMatcher("street", ignoreCase())
+                .withMatcher("houseNumber", ignoreCase())
+                .withMatcher("floorNumber", ignoreCase())
+                .withMatcher("doorNumber", ignoreCase())
+                .withMatcher("zipCode", ignoreCase());
 
+        Address probe = new Address(body);
+        Example<Address> example = Example.of(probe, addressMatcher);
+        var exists = addressRepository.exists(example);
+
+        if(exists) {
+            return null;
+        }
+
+        // TODO: Else add address to database and return response
+        Address newAddress = addressRepository.save(new Address(body));
         return new AddressResponse(newAddress);
-        //TODO: If address already exits in database, return corresponding response.
-        // Else add address to database and return response
+
+
     }
 
     public AddressResponse editAddress(AddressRequest body, long id) {
