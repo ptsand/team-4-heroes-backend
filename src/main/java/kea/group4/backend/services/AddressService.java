@@ -10,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.ignoreCase;
 
@@ -30,12 +31,12 @@ public class AddressService {
         Address addressToFind = addressRepository.findById(id).orElseThrow(() -> new Client4xxException("address not found"));
         return new AddressResponse(addressToFind);
     }
-
+// Derived Query Method:
 // https://www.baeldung.com/spring-data-exists-query#:~:text=4.%20Using%20a,well%2Dtested%20framework.
     public AddressResponse addAddress(AddressRequest body) {
 
         Address newAddress = new Address(body);
-        Address addressFromDatabase = addressRepository.findByStreetAndHouseNumberAndFloorNumberAndDoorNumberAndZipCode(
+        Optional<Address> addressFromDatabase = addressRepository.findByStreetAndHouseNumberAndFloorNumberAndDoorNumberAndZipCode(
                 newAddress.getStreet(),
                 newAddress.getHouseNumber(),
                 newAddress.getFloorNumber(),
@@ -43,19 +44,17 @@ public class AddressService {
                 newAddress.getZipCode()
         );
 
-        if(addressFromDatabase != null) {
-            return new AddressResponse(addressFromDatabase);
+        if(addressFromDatabase.isPresent()) {
+            return new AddressResponse(addressFromDatabase.get());
         }
 
-        addressRepository.save(newAddress);
-        return new AddressResponse(newAddress);
+        return new AddressResponse(addressRepository.save(newAddress));
     }
 
     public AddressResponse editAddress(AddressRequest body, long id) {
         Address addressToEdit = new Address(body);
         addressToEdit.setId(id);
-        addressRepository.save(addressToEdit);
-        return new AddressResponse(addressToEdit);
+        return new AddressResponse(addressRepository.save(addressToEdit));
     }
 
     public void deleteAddress(long id) {
