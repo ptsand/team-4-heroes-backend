@@ -57,8 +57,8 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     public void makeUsers() {
-        Person user1 = new Person("user1@mail.dk", "AAA", "aaa", 11111111);
-        Person user2= new Person("user2@mail.dk", "BBB", "bbb", 22222222);
+        Person user1 = new Person("user1@mail.dk", "AAA", "aaa", 11111111,"user1","passw0rd1");
+        Person user2= new Person("user2@mail.dk", "BBB", "bbb", 22222222,"user2","passw0rd2");
 
         personRepository.save(user1);
         personRepository.save(user2);
