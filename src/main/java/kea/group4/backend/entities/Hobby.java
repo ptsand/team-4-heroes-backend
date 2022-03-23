@@ -20,7 +20,7 @@ public class Hobby {
 
     private String name;
 
-    private Boolean isInDoor;
+    private String environment;
 
     private String description;
 
@@ -29,22 +29,18 @@ public class Hobby {
     @OneToMany(mappedBy = "hobby", fetch = FetchType.EAGER)
     private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
 
-    public Hobby(String name, Boolean isInDoor, String description, String category){
+    public Hobby(String name, String environment, String description, String category){
         this.name = name;
-        this.isInDoor = isInDoor;
+        this.environment = environment;
         this.description = description;
         this.category = category;
     }
 
     public Hobby(HobbyRequest body){
         this.name = body.getName();
-        this.isInDoor = body.getIsInDoor();
+        this.environment = body.getEnvironment();
         this.description = body.getDescription();
         this.category = body.getCategory();
     }
-
-
-
-
 
 }

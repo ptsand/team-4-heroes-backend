@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class HobbyResponse {
     long id;
     String name;
-    Boolean isInDoor;
+    String environment;
     String description;
     String category;
     Set<HobbyInfo> hobbyInfos;
@@ -24,7 +24,7 @@ public class HobbyResponse {
     public HobbyResponse(Hobby hobby){
         this.id = hobby.getId();
         this.name = hobby.getName();
-        this.isInDoor = hobby.getIsInDoor();
+        this.environment = hobby.getEnvironment();
         this.category = hobby.getCategory();
         this.description = hobby.getDescription();
         this.hobbyInfos = hobby.getHobbyInfos();

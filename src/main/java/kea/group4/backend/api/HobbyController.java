@@ -41,6 +41,4 @@ public class HobbyController {
         hobbyService.deleteHobby(id);
     }
 
-
-
 }

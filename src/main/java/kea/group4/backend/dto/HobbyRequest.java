@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class HobbyRequest {
     private String name;
-    private Boolean isInDoor;
+    private String environment;
     private String description;
     private String category;
 }
