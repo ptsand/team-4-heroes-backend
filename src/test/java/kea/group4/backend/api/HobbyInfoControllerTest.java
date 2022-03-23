@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ActiveProfiles("test")
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class HobbyInfoControllerTest {
     
     @Autowired
@@ -49,9 +49,10 @@ class HobbyInfoControllerTest {
     @BeforeEach
     public void setup() {
         hobbyInfoRepository.deleteAll();
+        personRepository.deleteAll();
         testHobby1 = hobbyRepository.save(new Hobby("tempHobbyName",true,"https://temp.test","tempCat"));
         testHobby2 = hobbyRepository.save(new Hobby("tempHobbyName2",false,"https://temp2.test","tempCat"));
-        testPerson = personRepository.save(new Person("test@mail.dev","Firstname","Lastname",88888888));
+        testPerson = personRepository.save(new Person("test@mail.dev","Firstname1","Lastname1",88888888));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby1)));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby2)));
     }
