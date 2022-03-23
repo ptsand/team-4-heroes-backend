@@ -1,18 +1,18 @@
 package kea.group4.backend.entities;
 
 import kea.group4.backend.dto.AddressRequest;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Address {
     @Id
@@ -30,16 +30,6 @@ public class Address {
         this.floorNumber = floorNumber;
         this.doorNumber = doorNumber;
         this.zipCode = zipCode;
-    }
-
-//TODO: Overload constructor?
-public Address(long id, String street, int houseNumber, int floorNumber, String doorNumber, int zipCode) {
-    this.id = id;
-    this.street = street;
-    this.houseNumber = houseNumber;
-    this.floorNumber = floorNumber;
-    this.doorNumber = doorNumber;
-    this.zipCode = zipCode;
     }
 
     public Address(AddressRequest body) {
