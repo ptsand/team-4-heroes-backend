@@ -5,9 +5,7 @@ import kea.group4.backend.entities.Hobby;
 import kea.group4.backend.repositories.HobbyRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HobbyService extends RuntimeException{
@@ -34,7 +32,7 @@ public class HobbyService extends RuntimeException{
     public HobbyResponse editHobby(HobbyRequest hobbyToEdit, long hobbyId) {
         Hobby hobby = hobbyRepository.findById(hobbyId).orElseThrow();
         hobby.setName(hobbyToEdit.getName());
-        hobby.setIsInDoor(hobbyToEdit.getIsInDoor());
+        hobby.setEnvironment(hobbyToEdit.getEnvironment());
         hobby.setDescription(hobbyToEdit.getDescription());
         hobby.setCategory(hobbyToEdit.getCategory());
         return new HobbyResponse(hobbyRepository.save(hobby));

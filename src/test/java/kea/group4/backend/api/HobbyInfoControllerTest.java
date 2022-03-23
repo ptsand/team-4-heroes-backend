@@ -50,8 +50,8 @@ class HobbyInfoControllerTest {
     public void setup() {
         hobbyInfoRepository.deleteAll();
         personRepository.deleteAll();
-        testHobby1 = hobbyRepository.save(new Hobby("tempHobbyName",true,"https://temp.test","tempCat"));
-        testHobby2 = hobbyRepository.save(new Hobby("tempHobbyName2",false,"https://temp2.test","tempCat"));
+        testHobby1 = hobbyRepository.save(new Hobby("tempHobbyName","indendørs","https://temp.test","tempCat"));
+        testHobby2 = hobbyRepository.save(new Hobby("tempHobbyName2","indendørs","https://temp2.test","tempCat"));
         testPerson = personRepository.save(new Person("test@mail.dev","Firstname1","Lastname1",88888888));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby1)));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby2)));
@@ -84,7 +84,7 @@ class HobbyInfoControllerTest {
 
     @Test
     public void testCreateHobbyInfo() throws Exception {
-        Hobby newHobby = hobbyRepository.save(new Hobby("tempHobbyName3",false,"https://temp3.test","tempCat"));
+        Hobby newHobby = hobbyRepository.save(new Hobby("tempHobbyName3","indendørs","https://temp3.test","tempCat"));
         HobbyInfoRequest hiReq = new HobbyInfoRequest(testPerson, newHobby);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/hobby-infos")
                         .contentType("application/json")

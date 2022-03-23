@@ -27,8 +27,8 @@ class HobbyInfoServiceTest {
     HobbyInfoService hobbyInfoService;
 
     Person person = new Person("test@mail.dev","Firstname","Lastname",88888888);
-    Hobby hobby1 = new Hobby("tempHobbyName",true,"https://temp.test","tempCat");
-    Hobby hobby2 = new Hobby("tempHobby2Name",true,"https://temp2.test","tempCat");
+    Hobby hobby1 = new Hobby("tempHobbyName","indendørs","https://temp.test","tempCat");
+    Hobby hobby2 = new Hobby("tempHobby2Name","indendørs","https://temp2.test","tempCat");
 
     @BeforeEach
     void setup(){

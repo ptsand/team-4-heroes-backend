@@ -27,8 +27,8 @@ class HobbyInfoRepositoryTest {
     @BeforeEach
     void setup(@Autowired PersonRepository personRepository, @Autowired HobbyRepository hobbyRepository) {
         hobbyInfoRepository.deleteAll();
-        testHobby1 = hobbyRepository.save(new Hobby("tempHobbyName",true,"https://temp.test","tempCat"));
-        testHobby2 = hobbyRepository.save(new Hobby("tempHobbyName2",false,"https://temp2.test","tempCat"));
+        testHobby1 = hobbyRepository.save(new Hobby("tempHobbyName","indendørs","https://temp.test","tempCat"));
+        testHobby2 = hobbyRepository.save(new Hobby("tempHobbyName2","indendørs","https://temp2.test","tempCat"));
         testPerson = personRepository.save(new Person("test@mail.dev","Firstname","Lastname",88888888));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby1)));
         hobbyInfos.add(hobbyInfoRepository.save(new HobbyInfo(testPerson, testHobby2)));

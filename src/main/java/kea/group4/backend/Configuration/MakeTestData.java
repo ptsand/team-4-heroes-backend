@@ -46,8 +46,8 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     public void makeHobbies() {
-        Hobby hobby1 = new Hobby("hobby1", true, "www.hobby1.com", "category=test");
-        Hobby hobby2 = new Hobby("hobby2", true, "www.hobby2.com", "category=test");
+        Hobby hobby1 = new Hobby("hobby1", "indendørs", "www.hobby1.com", "category=test");
+        Hobby hobby2 = new Hobby("hobby2", "indendørs", "www.hobby2.com", "category=test");
 
         hobbyRepository.save(hobby1);
         hobbyRepository.save(hobby2);
@@ -69,7 +69,7 @@ public class MakeTestData implements ApplicationRunner {
 
     public void makeHobbyInfos(){
         Person user3 = new Person("user3@mail.dk", "CCC", "ccc", 33333333);
-        Hobby hobby3 = new Hobby("hobby3", true, "www.hobby3.com", "category=test");
+        Hobby hobby3 = new Hobby("hobby3", "indendørs", "www.hobby3.com", "category=test");
         personRepository.save(user3);
         hobbyRepository.save(hobby3);
         HobbyInfo hobbyInfo = new HobbyInfo(user3,hobby3);
