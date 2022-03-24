@@ -1,5 +1,6 @@
 package kea.group4.backend.dto;
 
+import kea.group4.backend.entities.Address;
 import kea.group4.backend.security.UserWithPassword;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class PersonRequest {
     private String firstName;
     private String lastName;
     private long phoneNumber;
+    private Address address;
 
     @NotBlank
     @Size(min = UserWithPassword.USER_NAME_MIN_SIZE, max = UserWithPassword.USER_NAME_MAX_SIZE)

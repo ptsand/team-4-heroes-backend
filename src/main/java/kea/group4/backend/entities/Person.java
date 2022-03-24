@@ -26,6 +26,8 @@ public class Person implements UserWithPassword {
     private String lastName;
     private long phoneNumber; //TODO: Format phone number for print
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Address address;
     @JsonIgnore
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
