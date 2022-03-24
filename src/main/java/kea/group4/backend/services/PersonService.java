@@ -8,6 +8,7 @@ import kea.group4.backend.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -31,6 +32,11 @@ public class PersonService {
     public PersonResponse getPerson(long id) {
         Person person = personRepository.findById(id).orElseThrow(()->new Client4xxException("person not found"));
         return new PersonResponse(person);
+    }
+
+    public PersonResponse getPersonByUsername(String username) {
+        Optional<Person> personFromDatabase = personRepository.findByUsername(username);
+        return new PersonResponse(personFromDatabase.get());
     }
 
     public PersonResponse editPerson(PersonRequest body, long id) {

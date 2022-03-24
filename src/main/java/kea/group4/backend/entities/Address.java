@@ -1,12 +1,12 @@
 package kea.group4.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.group4.backend.dto.AddressRequest;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode
 @Getter
@@ -15,14 +15,24 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Entity
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String street;
+
     private int houseNumber;
+
     private int floorNumber;
+
     private String doorNumber;
+
     private int zipCode;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "address", fetch = FetchType.EAGER) // TODO: Which CascadeType should be used? Address should be removed ONLY IF it doesn't have any associated Persons
+    private Set<Person> persons = new HashSet<>();
 
     public Address(String street, int houseNumber, int floorNumber, String doorNumber, int zipCode) {
         this.street = street;
