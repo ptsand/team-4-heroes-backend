@@ -1,7 +1,9 @@
 package kea.group4.backend.services;
 
+import kea.group4.backend.dto.PersonAddressResponse;
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
+import kea.group4.backend.entities.Address;
 import kea.group4.backend.entities.Person;
 import kea.group4.backend.entities.Role;
 import kea.group4.backend.error.Client4xxException;
@@ -49,9 +51,11 @@ public class PersonService {
         return new PersonResponse(person);
     }
 
-    public PersonResponse getPersonByUsername(String username) {
+    public PersonAddressResponse getFullUserDetails(String username) {
         Optional<Person> personFromDatabase = personRepository.findByUsername(username);
-        return new PersonResponse(personFromDatabase.get());
+        Address address = personFromDatabase.get().getAddress();
+        // if address not null
+        return new PersonAddressResponse(personFromDatabase.get(), address);
     }
 
     public PersonResponse editPerson(PersonRequest body, long id) {

@@ -1,8 +1,8 @@
 package kea.group4.backend.api;
 
+import kea.group4.backend.dto.PersonAddressResponse;
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
-import kea.group4.backend.security.dto.SignupResponse;
 import kea.group4.backend.services.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,9 +39,9 @@ public class PersonController {
     }
 
     @GetMapping("/details")
-    public Object getPersonByUsername(@RequestParam String username) {
-        System.out.println("getPersonByUsername()");
-        return personService.getPersonByUsername(username);
+    public PersonAddressResponse getPersonByUsername(@RequestParam String username) {
+        System.out.println("getFullUserDetails()");
+        return personService.getFullUserDetails(username);
     }
 
     @GetMapping("/{id}/hobbies")
