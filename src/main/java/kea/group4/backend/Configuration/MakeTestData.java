@@ -43,12 +43,31 @@ public class MakeTestData implements ApplicationRunner {
     }
 
     public void makeHobbies() {
-        Hobby hobby1 = new Hobby("hobby1", "indendørs", "www.hobby1.com", "category=test");
-        Hobby hobby2 = new Hobby("hobby2", "indendørs", "www.hobby2.com", "category=test");
-
-        hobbyRepository.save(hobby1);
-        hobbyRepository.save(hobby2);
-
+        hobbyRepository.save(new Hobby("Breakdancing","Udendørs","https://en.wikipedia.org/wiki/Breakdancing","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Climbing","Udendørs","https://en.wikipedia.org/wiki/Climbing","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Cricket","Udendørs","https://en.wikipedia.org/wiki/Cricket","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Croquet","Udendørs","https://en.wikipedia.org/wiki/Croquet","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Cycling","Udendørs","https://en.wikipedia.org/wiki/Cycling","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Disc golf","Udendørs","https://en.wikipedia.org/wiki/Disc_golf","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Dog sport","Udendørs","https://en.wikipedia.org/wiki/Dog_sport","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Equestrianism","Udendørs","https://en.wikipedia.org/wiki/Equestrianism","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Exhibition drill","Udendørs","https://en.wikipedia.org/wiki/Exhibition_drill","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Field hockey","Udendørs","https://en.wikipedia.org/wiki/Field_hockey","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Figure skating","Udendørs","https://en.wikipedia.org/wiki/Figure_skating","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Fishing","Udendørs","https://en.wikipedia.org/wiki/Fishing","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Footbag","Udendørs","https://en.wikipedia.org/wiki/Footbag","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Frisbee","Udendørs","https://en.wikipedia.org/wiki/Frisbee","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Golf","Udendørs","https://en.wikipedia.org/wiki/Golf","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Handball","Udendørs","https://en.wikipedia.org/wiki/Handball","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Horseback riding","Udendørs","https://en.wikipedia.org/wiki/Horseback_riding","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Horseshoes","Udendørs","https://en.wikipedia.org/wiki/Horseshoes","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Iceboat","Udendørs","https://en.wikipedia.org/wiki/Iceboat","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Jukskei","Udendørs","https://en.wikipedia.org/wiki/Jukskei","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Kart racing","Udendørs","https://en.wikipedia.org/wiki/Kart_racing","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Knife throwing","Udendørs","https://en.wikipedia.org/wiki/Knife_throwing","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Lacrosse","Udendørs","https://en.wikipedia.org/wiki/Lacrosse","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Longboarding","Udendørs","https://en.wikipedia.org/wiki/Longboarding","Konkurrence hobbyer"));
+        hobbyRepository.save(new Hobby("Long-distance running","Udendørs","https://en.wikipedia.org/wiki/Long-distance_running","Konkurrence hobbyer"));
         System.out.println("CREATED " + hobbyRepository.count() + " TEST HOBBIES");
 
     }

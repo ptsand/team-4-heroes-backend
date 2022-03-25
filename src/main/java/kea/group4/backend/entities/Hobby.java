@@ -26,7 +26,7 @@ public class Hobby {
 
     private  String category;
     @JsonIgnore
-    @OneToMany(mappedBy = "hobby", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "hobby", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
 
     public Hobby(String name, String environment, String description, String category){
