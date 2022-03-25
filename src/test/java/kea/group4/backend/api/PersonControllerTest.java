@@ -10,18 +10,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 class PersonControllerTest {
 
     @Autowired
     MockMvc mockMvc;
-    // TODO: mockito tests
 
     @Autowired
     PersonRepository personRepository;
@@ -39,17 +39,6 @@ class PersonControllerTest {
         personRepository.save(new Person("test1@email.dk", "Anders", "Andersen", 88888888));
         personRepository.save(new Person("test2@email.dk", "Bent", "Bendsen", 88888888));
         personRepository.save(new Person("test3@email.dk", "Charlotte", "Caroline", 88888888));
-    }
-
-    @Test //Passed
-    void getPersons() {
-        personService.getPersons();
-    }
-
-    @Test //Passed
-    void countPersons() {
-        assertEquals(3, personRepository.count());
-        System.out.println(personRepository.count());
     }
 
 }
