@@ -78,5 +78,7 @@ public class Person implements UserWithPassword {
         this.firstName = body.getFirstName();
         this.lastName = body.getLastName();
         this.phoneNumber = body.getPhoneNumber();
+        this.username = body.getUsername();
+        this.password = pwEncoder.encode(body.getPassword());
     }
 }
