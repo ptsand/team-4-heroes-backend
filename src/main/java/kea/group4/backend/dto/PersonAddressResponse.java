@@ -1,7 +1,5 @@
 package kea.group4.backend.dto;
 
-import kea.group4.backend.entities.Address;
-import kea.group4.backend.entities.Person;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,11 @@ import javax.persistence.SecondaryTable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonAddressResponse {
-    private Person person;
-    private Address address;
+    private PersonResponse person;
+    private AddressResponse address;
+
+    public PersonAddressResponse(PersonResponse personResponse) {
+        this.person = personResponse;
+        this.address = null;
+    }
 }

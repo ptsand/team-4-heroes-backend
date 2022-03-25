@@ -1,8 +1,10 @@
 package kea.group4.backend.api;
 
+import kea.group4.backend.dto.AddressRequest;
 import kea.group4.backend.dto.PersonAddressResponse;
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
+import kea.group4.backend.services.AddressService;
 import kea.group4.backend.services.PersonService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +19,18 @@ public class PersonController {
 
     PersonService personService;
 
-    public PersonController(PersonService personService) {
+    AddressService addressService;
+
+    public PersonController(PersonService personService, AddressService addressService) {
         this.personService = personService;
+        this.addressService = addressService;
     }
 
-    //Create
     @PostMapping
     public ResponseEntity<PersonResponse> addPerson(@RequestBody @Valid PersonRequest body) {
         return ResponseEntity.ok(personService.addPerson(body));
     }
 
-    //Read
     @GetMapping
     public List<PersonResponse> getPersons(){
         return personService.getPersons();
@@ -49,13 +52,16 @@ public class PersonController {
         return personService.getPerson(id);
     }
 
-    //Update
     @PutMapping("/{id}")
     public PersonResponse editPerson(@RequestBody PersonRequest body, @PathVariable long id){
         return personService.editPerson(body, id);
     }
 
-    //Delete
+    @PutMapping("/{id}/address")
+    public void addAddressToPerson(@RequestBody AddressRequest body, @PathVariable long id){
+        personService.addAddressToPerson(body, id);
+    }
+
     @DeleteMapping("/{id}")
     public void deletePerson(@PathVariable long id){
         personService.deletePerson(id);
