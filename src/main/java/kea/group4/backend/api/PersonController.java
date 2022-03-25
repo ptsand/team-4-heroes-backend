@@ -34,8 +34,9 @@ public class PersonController {
         return personService.getPerson(id);
     }
 
-    @GetMapping("/{username}")
-    public PersonResponse getPersonByUsername(@PathVariable String username) {
+    @GetMapping("/details")
+    public Object getPersonByUsername(@RequestParam String username) {
+        System.out.println("getPersonByUsername()");
         return personService.getPersonByUsername(username);
     }
 

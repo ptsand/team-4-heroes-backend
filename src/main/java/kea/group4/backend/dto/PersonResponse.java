@@ -1,10 +1,18 @@
 package kea.group4.backend.dto;
 
 import kea.group4.backend.entities.Person;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class PersonResponse {
     long id;
     String email;
