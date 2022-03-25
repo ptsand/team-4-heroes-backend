@@ -1,9 +1,6 @@
 package kea.group4.backend.Configuration;
 
-import kea.group4.backend.entities.Address;
-import kea.group4.backend.entities.Hobby;
-import kea.group4.backend.entities.HobbyInfo;
-import kea.group4.backend.entities.Person;
+import kea.group4.backend.entities.*;
 import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.AddressRepository;
 import kea.group4.backend.repositories.HobbyInfoRepository;
@@ -59,7 +56,8 @@ public class MakeTestData implements ApplicationRunner {
     public void makeUsers() {
         Person user1 = new Person("user1@mail.dk", "AAA", "aaa", 11111111,"user1","passw0rd1");
         Person user2= new Person("user2@mail.dk", "BBB", "bbb", 22222222,"user2","passw0rd2");
-
+        user1.addRole(Role.USER);
+        user2.addRole(Role.ADMIN);
         personRepository.save(user1);
         personRepository.save(user2);
 
@@ -75,7 +73,7 @@ public class MakeTestData implements ApplicationRunner {
         HobbyInfo hobbyInfo = new HobbyInfo(user3,hobby3);
         hobbyInfoRepository.save(hobbyInfo);
         Person user = personRepository.findById(user3.getId()).orElseThrow(()->new Client4xxException("not found"));
-        String email = user.getHobbyInfos().stream().collect(Collectors.toList()).get(0).getPerson().getEmail();
+        String email = user.getHobbyInfos().stream().collect(Collectors.toList()).get(0).getPerson().getEmail(); // TODO: remove this?
     }
 
 
