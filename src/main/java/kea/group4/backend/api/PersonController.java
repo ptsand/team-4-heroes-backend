@@ -35,6 +35,11 @@ public class PersonController {
         return personService.getPerson(id);
     }
 
+    @GetMapping("/{username}")
+    public PersonResponse getPersonByUsername(@PathVariable String username) {
+        return personService.getPersonByUsername(username);
+    }
+
     @GetMapping("/{id}/hobbies")
     public PersonResponse getPersonHobbies(@PathVariable long id) throws Exception {
         return personService.getPerson(id);
