@@ -29,7 +29,7 @@ public class Person implements UserWithPassword {
     @ManyToOne(fetch = FetchType.EAGER)
     private Address address;
     @JsonIgnore
-    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     private Set<HobbyInfo> hobbyInfos = new HashSet<HobbyInfo>();
     // Below attributes are required for the security part
     @Column(nullable = false, length = 50, unique = true)
