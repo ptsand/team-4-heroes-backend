@@ -1,9 +1,6 @@
 package kea.group4.backend.api;
 
-import kea.group4.backend.dto.AddressRequest;
-import kea.group4.backend.dto.PersonAddressResponse;
-import kea.group4.backend.dto.PersonRequest;
-import kea.group4.backend.dto.PersonResponse;
+import kea.group4.backend.dto.*;
 import kea.group4.backend.services.AddressService;
 import kea.group4.backend.services.PersonService;
 import org.springframework.http.ResponseEntity;
@@ -57,9 +54,9 @@ public class PersonController {
         return personService.editPerson(body, id);
     }
 
-    @PutMapping("/{id}/address")
-    public void addAddressToPerson(@RequestBody AddressRequest body, @PathVariable long id){
-        personService.addAddressToPerson(body, id);
+    @PutMapping("/{username}/address")
+    public AddressResponse addAddressToPerson(@RequestBody AddressRequest body, @PathVariable String username){
+        return personService.addAddressToPerson(body, username);
     }
 
     @DeleteMapping("/{id}")

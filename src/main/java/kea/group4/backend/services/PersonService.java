@@ -21,8 +21,9 @@ public class PersonService {
 
     AddressService addressService;
 
-    public PersonService(PersonRepository personRepository) {
+    public PersonService(PersonRepository personRepository, AddressService addressService) {
         this.personRepository = personRepository;
+        this.addressService = addressService;
     }
 
     public PersonResponse addPerson(PersonRequest body) {
@@ -75,11 +76,12 @@ public class PersonService {
         personRepository.delete(person);
     }
 
-    public void addAddressToPerson(AddressRequest body, long personId) {
+    public AddressResponse addAddressToPerson(AddressRequest body, String username) {
         AddressResponse aResponse = addressService.addAddress(body);
         Address address = new Address(aResponse);
-        Person person = personRepository.findById(personId).orElseThrow();
+        Person person = personRepository.findByUsername(username).orElseThrow();
         person.setAddress(address);
         personRepository.save(person);
+        return aResponse;
     }
 }
