@@ -3,12 +3,15 @@ package kea.group4.backend.services;
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
 import kea.group4.backend.entities.Person;
+import kea.group4.backend.entities.Role;
 import kea.group4.backend.error.Client4xxException;
 import kea.group4.backend.repositories.PersonRepository;
+import kea.group4.backend.security.dto.SignupResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -20,7 +23,19 @@ public class PersonService {
     }
 
     public PersonResponse addPerson(PersonRequest body) {
-        Person person = personRepository.save(new Person(body));
+        if(personRepository.existsByUsername(body.getUsername())){
+            throw new Client4xxException("Username is taken");
+        }
+        if(personRepository.existsByEmail(body.getEmail())){
+            throw new Client4xxException("Email is used by another user");
+        }
+
+        Person person = new Person(body);
+
+        // All new users are by default given the role USER
+        person.addRole(Role.USER);
+
+        personRepository.save(person);
         return new PersonResponse(person);
     }
 

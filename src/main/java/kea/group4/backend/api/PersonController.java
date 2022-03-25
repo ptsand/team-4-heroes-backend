@@ -2,12 +2,16 @@ package kea.group4.backend.api;
 
 import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.dto.PersonResponse;
+import kea.group4.backend.security.dto.SignupResponse;
 import kea.group4.backend.services.PersonService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/persons")
 public class PersonController {
 
@@ -19,8 +23,8 @@ public class PersonController {
 
     //Create
     @PostMapping
-    public PersonResponse addPerson(@RequestBody PersonRequest body) {
-        return personService.addPerson(body);
+    public ResponseEntity<PersonResponse> addPerson(@RequestBody @Valid PersonRequest body) {
+        return ResponseEntity.ok(personService.addPerson(body));
     }
 
     //Read
