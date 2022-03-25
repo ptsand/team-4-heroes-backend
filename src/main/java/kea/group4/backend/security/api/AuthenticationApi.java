@@ -1,11 +1,8 @@
 package kea.group4.backend.security.api;
 
-import kea.group4.backend.dto.PersonRequest;
 import kea.group4.backend.error.Client4xxException;
-import kea.group4.backend.security.UserService;
 import kea.group4.backend.security.dto.LoginRequest;
 import kea.group4.backend.security.dto.LoginResponse;
-import kea.group4.backend.security.dto.SignupResponse;
 import kea.group4.backend.security.jwt.JwtTokenUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,12 +24,10 @@ import java.util.stream.Collectors;
 public class AuthenticationApi {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserService userService;
 
-    public AuthenticationApi(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserService userService) {
+    public AuthenticationApi(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
-        this.userService = userService;
     }
 
     @PostMapping("/login")
@@ -52,10 +47,4 @@ public class AuthenticationApi {
             throw new Client4xxException("Incorrect username or password", HttpStatus.UNAUTHORIZED);
         }
     }
-
-    @PostMapping("/register")
-    public ResponseEntity<SignupResponse> register(@RequestBody @Valid PersonRequest request) {
-        return ResponseEntity.ok(userService.createUser(request));
-    }
-
 }
