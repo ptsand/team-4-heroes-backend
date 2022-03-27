@@ -25,7 +25,7 @@ public class Address {
 
     private int houseNumber;
 
-    private int floorNumber;
+    private int floorNumber;     // TODO: Floor nr should be String, because of kl. and st. Currently crashes search
 
     private String doorNumber;
 
