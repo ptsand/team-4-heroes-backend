@@ -1,10 +1,11 @@
 package kea.group4.backend.services;
 
-import kea.group4.backend.dto.PersonRequest;
-import kea.group4.backend.dto.PersonResponse;
+import kea.group4.backend.dto.*;
+import kea.group4.backend.entities.Address;
 import kea.group4.backend.entities.Person;
 import kea.group4.backend.entities.Role;
 import kea.group4.backend.error.Client4xxException;
+import kea.group4.backend.repositories.AddressRepository;
 import kea.group4.backend.repositories.PersonRepository;
 import kea.group4.backend.security.dto.SignupResponse;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,11 @@ public class PersonService {
 
     PersonRepository personRepository;
 
-    public PersonService(PersonRepository personRepository) {
+    AddressService addressService;
+
+    public PersonService(PersonRepository personRepository, AddressService addressService) {
         this.personRepository = personRepository;
+        this.addressService = addressService;
     }
 
     public PersonResponse addPerson(PersonRequest body) {
@@ -49,9 +53,14 @@ public class PersonService {
         return new PersonResponse(person);
     }
 
-    public PersonResponse getPersonByUsername(String username) {
-        Optional<Person> personFromDatabase = personRepository.findByUsername(username);
-        return new PersonResponse(personFromDatabase.get());
+    public PersonAddressResponse getFullUserDetails(String username) {
+        Person personFromDatabase = personRepository.findByUsername(username).orElseThrow(()->new Client4xxException("user data not found"));
+        Address address = personFromDatabase.getAddress();
+
+        if(address==null) {
+            return new PersonAddressResponse(new PersonResponse(personFromDatabase));
+        }
+        return new PersonAddressResponse(new PersonResponse(personFromDatabase), new AddressResponse(address));
     }
 
     public PersonResponse editPerson(PersonRequest body, long id) {
@@ -65,5 +74,14 @@ public class PersonService {
     public void deletePerson(long id) {
         Person person = personRepository.findById(id).orElseThrow();
         personRepository.delete(person);
+    }
+
+    public AddressResponse addAddressToPerson(AddressRequest body, String username) {
+        AddressResponse aResponse = addressService.addAddress(body);
+        Address address = new Address(aResponse);
+        Person person = personRepository.findByUsername(username).orElseThrow();
+        person.setAddress(address);
+        personRepository.save(person);
+        return aResponse;
     }
 }

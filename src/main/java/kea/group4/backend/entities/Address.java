@@ -2,6 +2,7 @@ package kea.group4.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.group4.backend.dto.AddressRequest;
+import kea.group4.backend.dto.AddressResponse;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Address {
 
     private int houseNumber;
 
-    private int floorNumber;
+    private int floorNumber;     // TODO: Floor nr should be String, because of kl. and st. Currently crashes search
 
     private String doorNumber;
 
@@ -48,5 +49,14 @@ public class Address {
         this.floorNumber = body.getFloorNumber();
         this.doorNumber = body.getDoorNumber();
         this.zipCode = body.getZipCode();
+    }
+
+    public Address(AddressResponse addressResponse) {
+        this.id = addressResponse.getId();
+        this.street = addressResponse.getStreet();
+        this.houseNumber = addressResponse.getHouseNumber();
+        this.floorNumber = addressResponse.getFloorNumber();
+        this.doorNumber = addressResponse.getDoorNumber();
+        this.zipCode = addressResponse.getZipCode();
     }
 }
