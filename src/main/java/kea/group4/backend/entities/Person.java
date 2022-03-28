@@ -38,7 +38,7 @@ public class Person implements UserWithPassword {
     // https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
     @Column(nullable = false, length = 72)
     private String password;
-    boolean enabled;
+    private boolean enabled;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "ENUM('USER','ADMIN')")
     @ElementCollection(fetch = FetchType.EAGER)
@@ -85,4 +85,6 @@ public class Person implements UserWithPassword {
         this.password = pwEncoder.encode(body.getPassword());
         this.enabled = true;
     }
+
+    public boolean isEnabled() { return this.enabled; }
 }
