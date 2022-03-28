@@ -58,6 +58,7 @@ public class Person implements UserWithPassword {
         // TODO: fix tests instead
         this.username = firstName;
         this.password = lastName;
+        this.enabled = true;
     }
 
     public Person(String email, String firstName, String lastName, long phoneNumber, String username, String password) {
@@ -82,5 +83,6 @@ public class Person implements UserWithPassword {
         this.phoneNumber = body.getPhoneNumber();
         this.username = body.getUsername();
         this.password = pwEncoder.encode(body.getPassword());
+        this.enabled = true;
     }
 }
