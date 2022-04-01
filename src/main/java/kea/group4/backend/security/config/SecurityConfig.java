@@ -4,7 +4,6 @@ import kea.group4.backend.repositories.PersonRepository;
 import kea.group4.backend.security.UserDetailsServiceImp;
 import kea.group4.backend.security.UserWithPassword;
 import kea.group4.backend.security.jwt.JwtTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,20 +21,22 @@ import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
-
 @EnableWebSecurity(debug = false)
-//jsr250Enabled = true enables @RolesAllowed annotation.
 @EnableGlobalMethodSecurity(
         //securedEnabled = true,
-        jsr250Enabled = true
+        jsr250Enabled = true // enables @RolesAllowed annotation.
         //prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PersonRepository userRepository;
+    private final UserDetailsServiceImp userDetailsService;
+    private final JwtTokenFilter jwtTokenFilter;
 
-    public SecurityConfig(PersonRepository userRepository) {
+    public SecurityConfig(PersonRepository userRepository, UserDetailsServiceImp userDetailsService, JwtTokenFilter jwtTokenFilter) {
         this.userRepository = userRepository;
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenFilter = jwtTokenFilter;
     }
 
     @Bean
@@ -43,30 +44,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return UserWithPassword.getPasswordEncoder();
     }
 
-    @Autowired
-    private UserDetailsServiceImp userDetailsService;
-
-    @Autowired
-    private JwtTokenFilter jwtTokenFilter;
-//    @Bean
-//    public JwtTokenFilter authenticationJwtTokenFilter() {
-//        return new JwtTokenFilter();
-//    }
-
+    // Allow all origins temporary for development
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        //config.addAllowedOrigin("*");
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -107,6 +97,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
 
 }
