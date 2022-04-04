@@ -5,14 +5,12 @@ import kea.group4.backend.entities.Address;
 import kea.group4.backend.entities.Person;
 import kea.group4.backend.entities.Role;
 import kea.group4.backend.error.Client4xxException;
-import kea.group4.backend.repositories.AddressRepository;
+import kea.group4.backend.error.ResourceAlreadyExistsException;
+import kea.group4.backend.error.ResourceNotFoundException;
 import kea.group4.backend.repositories.PersonRepository;
-import kea.group4.backend.security.dto.SignupResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PersonService {
@@ -28,10 +26,10 @@ public class PersonService {
 
     public PersonResponse addPerson(PersonRequest body) {
         if(personRepository.existsByUsername(body.getUsername())){
-            throw new Client4xxException("Username is taken");
+            throw new ResourceAlreadyExistsException("Username is already taken");
         }
         if(personRepository.existsByEmail(body.getEmail())){
-            throw new Client4xxException("Email is used by another user");
+            throw new ResourceAlreadyExistsException("Email is used by another person");
         }
 
         Person person = new Person(body);
@@ -49,7 +47,7 @@ public class PersonService {
     }
 
     public PersonResponse getPerson(long id) {
-        Person person = personRepository.findById(id).orElseThrow(()->new Client4xxException("person not found"));
+        Person person = personRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Person not found"));
         return new PersonResponse(person);
     }
 

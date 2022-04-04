@@ -3,6 +3,7 @@ import kea.group4.backend.dto.HobbyInfoRequest;
 import kea.group4.backend.dto.HobbyInfoResponse;
 import kea.group4.backend.entities.HobbyInfo;
 import kea.group4.backend.error.Client4xxException;
+import kea.group4.backend.error.ResourceNotFoundException;
 import kea.group4.backend.repositories.HobbyInfoRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,8 @@ public class HobbyInfoService {
     }
 
     public HobbyInfoResponse getHobbyInfo(long id){
-        HobbyInfo hobbyInfo = hobbyInfoRepository.findById(id).orElseThrow(()->new Client4xxException("HobbyInfo not found"));
+        HobbyInfo hobbyInfo = hobbyInfoRepository.findById(id).orElseThrow(()->
+                new ResourceNotFoundException(String.format("HobbyInfo with id %s not found", id)));
         return new HobbyInfoResponse(hobbyInfo);
     }
 
