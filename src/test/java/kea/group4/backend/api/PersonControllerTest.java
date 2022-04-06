@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ActiveProfiles("test")
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class PersonControllerTest {
 
     @Autowired
@@ -72,7 +72,6 @@ class PersonControllerTest {
         assertEquals(1, personRepository.count());
     }
 
-    @AutoConfigureMockMvc(addFilters = false)
     @Test
     void testPersonNotFound() throws Exception {
         // request a nonexistent person and verify HTTP Status and error response
