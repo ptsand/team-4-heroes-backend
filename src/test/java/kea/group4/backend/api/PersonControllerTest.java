@@ -72,6 +72,7 @@ class PersonControllerTest {
         assertEquals(1, personRepository.count());
     }
 
+    @AutoConfigureMockMvc(addFilters = false)
     @Test
     void testPersonNotFound() throws Exception {
         // request a nonexistent person and verify HTTP Status and error response
