@@ -22,7 +22,7 @@ public class PersonController {
         this.addressService = addressService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<PersonResponse> addPerson(@RequestBody @Valid PersonRequest body) {
         return ResponseEntity.ok(personService.addPerson(body));
     }

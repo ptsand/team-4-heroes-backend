@@ -45,7 +45,7 @@ class PersonControllerTest {
     @Test
     void testAddPerson() throws Exception {
         PersonRequest personRequest = new PersonRequest("first", "last", 88888888, null, "testUser", "test@mail.dk", "s3cr3etpass");
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/persons")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/persons/register")
                         .contentType("application/json")
                         .accept("application/json")
                         .content(objectMapper.writeValueAsString(personRequest)))
@@ -60,7 +60,7 @@ class PersonControllerTest {
     void testAddPersonWhenUsernameExists() throws Exception {
         personRepository.save(new Person("user@mail.dk", "AAA", "aaa", 11111111,"testUser","passw0rd"));
         PersonRequest personRequest = new PersonRequest("first", "last", 88888888, null, "testUser", "test@mail.dk", "passw0rd");
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/persons")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/persons/register")
                         .contentType("application/json")
                         .accept("application/json")
                         .content(objectMapper.writeValueAsString(personRequest)))
